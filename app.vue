@@ -1,9 +1,19 @@
 <template>
   <div>
-    <h1>Hi {{ username }}</h1>
+    <TheHeader />
+    <NuxtPage />
+    <TheFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-const username = ref<string>('danon')
+useHead({
+  titleTemplate(title) {
+    if (!title) {
+      return 'Kalinka Realty'
+    }
+
+    return `${title} | Kalinka Realty`
+  },
+})
 </script>
