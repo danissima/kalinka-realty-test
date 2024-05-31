@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <!-- <div id="app"> -->
     <TheHeader />
-    <NuxtPage />
+    <main class="main">
+      <NuxtPage />
+    </main>
     <TheFooter />
-  </div>
+  <!-- </div> -->
 </template>
 
 <script setup lang="ts">
@@ -17,3 +19,18 @@ useHead({
   },
 })
 </script>
+
+<style lang="scss">
+html,
+body,
+#__nuxt {
+  height: 100%;
+}
+
+#__nuxt {
+  flex-direction: column;
+  display: flex;
+  min-height: 100%;
+  height: auto;
+}
+</style>

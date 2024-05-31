@@ -4,3 +4,8 @@
   </footer>
 </template>
 
+<style lang="scss">
+.footer {
+  margin-top: auto;
+}
+</style>
