@@ -1,0 +1,10 @@
+@mixin break($breakpoint) {
+  @media screen and (max-width: $breakpoint - 1px) {
+    @content;
+  }
+}
+
+@function toRem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}

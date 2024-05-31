@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <AppContainer>
     {{ page }}
-  </div>
+  </AppContainer>
 </template>
 
 <script lang="ts" setup>
