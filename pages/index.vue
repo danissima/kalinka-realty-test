@@ -1,13 +1,13 @@
 <template>
   <section class="about">
     <AppContainer>
-      <p class="about__text">Реализуем современные архитектурные решения уже <b>2 дня</b>!</p>
+      <h1>Агентство элитной недвижимости в Москве</h1>
     </AppContainer>
   </section>
   <section class="objects">
     <AppContainer>
-      <h2>Проекты</h2>
-      <p class="objects__description">Наши приоритеты - удобство, красота и эстетичность.</p>
+      <h2>Жилые комплексы и проекты</h2>
+      <p class="objects__description">Наши приоритеты - удобство, красота и эстетичность</p>
       <div class="objects__grid">
         <ObjectCard
           v-for="object in objectsCards"
@@ -22,7 +22,7 @@
 
 <script setup>
 useHead({
-  title: 'Home',
+  title: 'Главная',
 })
 
 const route = useRoute()
@@ -61,7 +61,7 @@ section + section {
 }
 
 .about {
-  &__text {
+  h1 {
     text-align: center;
     font-size: toRem(28);
   }

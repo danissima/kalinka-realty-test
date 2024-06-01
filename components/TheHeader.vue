@@ -1,6 +1,8 @@
 <template>
   <header class="header">
-    <h1>Kalinka Realty</h1>
+    <NuxtLink to="/">
+      <IconLogo class="header__logo" />
+    </NuxtLink>
   </header>
 </template>
 
@@ -8,5 +10,10 @@
 .header {
   padding: toRem(24) 0;
   text-align: center;
+
+  &__logo {
+    width: 100%;
+    max-width: 400px;
+  }
 }
 </style>
