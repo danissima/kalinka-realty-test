@@ -73,10 +73,19 @@ section + section {
   }
 
   &__grid {
+    --columns: 3;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(var(--columns), 1fr);
     gap: 16px;
     margin-top: toRem(16);
+
+    @include break($xl) {
+      --columns: 2;
+    }
+
+    @include break($md) {
+      --columns: 1;
+    }
   }
 }
 </style>
