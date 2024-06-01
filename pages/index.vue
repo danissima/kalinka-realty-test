@@ -9,13 +9,9 @@
       <h2>Жилые комплексы и проекты</h2>
       <p class="objects__description">Наши приоритеты - удобство, красота и эстетичность</p>
       <div class="objects__grid">
-        <ObjectCard
-          v-for="object in objectsCards"
-          :key="object.id"
-          :info="object"
-          locale="ru"
-        />
+        <ObjectCard v-for="object in objectsCards" :key="object.id" :info="object" locale="ru" />
       </div>
+      <AppPagination :total-pages="5" :current-page-index="page" @page-change="changePage" />
     </AppContainer>
   </section>
 </template>
@@ -26,15 +22,15 @@ useHead({
 })
 
 const route = useRoute()
-const page = route.query.page || 1
+const router = useRouter()
+const page = ref(Number(route.query.page) || 1)
 
-const OBJECTS_PER_PAGE = 9
-const { data: objects, error } = useFetch(`https://kalinka.phuket.forsale/objects`, {
-  query: {
-    '_page': page,
-    '_limit': OBJECTS_PER_PAGE,
-  }
-})
+const OBJECTS_PER_PAGE = 6
+const { data: objects, pending } = await useFetch(
+  () => `https://kalinka.phuket.forsale/objects?_page=${page.value}&_limit=${OBJECTS_PER_PAGE}`,
+  {
+    key: `objects-${page.value}`,
+  })
 
 const objectsCards = computed(() => {
   if (!objects.value?.length) return []
@@ -51,8 +47,17 @@ const objectsCards = computed(() => {
   })
 })
 
+function changePage(newPageIndex) {
+  page.value = newPageIndex
 
-
+  router.push({
+    path: '/',
+    query: {
+      ...route.query,
+      'page': newPageIndex,
+    }
+  })
+}
 </script>
 
 <style lang="scss">
@@ -77,7 +82,7 @@ section + section {
     display: grid;
     grid-template-columns: repeat(var(--columns), 1fr);
     gap: 16px;
-    margin-top: toRem(16);
+    margin: toRem(16) 0;
 
     @include break($xl) {
       --columns: 2;

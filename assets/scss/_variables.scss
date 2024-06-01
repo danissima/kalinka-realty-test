@@ -9,8 +9,13 @@ $lg: 1024px;
 $md: 768px;
 $sm: 576px;
 
+/* transitions */
+$transition: .2s ease-out;
+$transition-slow: .4s ease-out;
+
 /* colors */
-$primary: #007aff;
+$blue: #007aff;
+$red: #f36163;
 $dark: #1d222d;
 $white: #fff;
 $black: #000;
