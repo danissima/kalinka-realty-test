@@ -6,6 +6,7 @@
 
 <style lang="scss">
 .header {
+  padding: toRem(24) 0;
   text-align: center;
 }
 </style>

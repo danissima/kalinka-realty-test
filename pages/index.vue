@@ -1,6 +1,13 @@
 <template>
+  <section class="about">
+    <AppContainer>
+      <p class="about__text">Реализуем современные архитектурные решения уже <b>2 дня</b>!</p>
+    </AppContainer>
+  </section>
   <section class="objects">
     <AppContainer>
+      <h2>Проекты</h2>
+      <p class="objects__description">Наши приоритеты - удобство, красота и эстетичность.</p>
       <div class="objects__grid">
         <ObjectCard
           v-for="object in objectsCards"
@@ -49,11 +56,27 @@ const objectsCards = computed(() => {
 </script>
 
 <style lang="scss">
+section + section {
+  margin-top: toRem(80);
+}
+
+.about {
+  &__text {
+    text-align: center;
+    font-size: toRem(28);
+  }
+}
+
 .objects {
+  h2 {
+    margin-bottom: toRem(20);
+  }
+
   &__grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
+    margin-top: toRem(16);
   }
 }
 </style>
