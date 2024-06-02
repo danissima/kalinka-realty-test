@@ -1,7 +1,7 @@
 import type { TObjectType } from "~/pages/objects/[id].vue"
 
 export default function useObject() {
-  function getTypeHintClasses(objectType: TObjectType) {
+  function getTypeHintClasses(objectType: TObjectType): Record<string, boolean> {
     const typeToClass = objectType.toLowerCase()
 
     return  {
@@ -10,7 +10,7 @@ export default function useObject() {
     }
   }
 
-  function getTypeThemeClasses(blockClass: string, objectType: TObjectType) {
+  function getTypeThemeClasses(blockClass: string, objectType: TObjectType): Record<string, boolean> {
     const typeToClass = objectType.toLowerCase()
 
     return {

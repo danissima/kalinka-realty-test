@@ -15,23 +15,26 @@
   </section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
+import type { TObjectCard } from '~/components/ObjectCard.vue';
+import type { IObject } from './objects/[id].vue';
+
 useHead({
   title: 'Главная',
 })
 
 const route = useRoute()
 const router = useRouter()
-const page = ref(Number(route.query.page) || 1)
+const page = ref<number>(Number(route.query.page) || 1)
 
-const OBJECTS_PER_PAGE = 6
-const { data: objects, pending } = await useFetch(
+const OBJECTS_PER_PAGE: number = 6
+const { data: objects, pending } = await useFetch<IObject[]>(
   () => `https://kalinka.phuket.forsale/objects?_page=${page.value}&_limit=${OBJECTS_PER_PAGE}`,
   {
     key: `objects-${page.value}`,
   })
 
-const objectsCards = computed(() => {
+const objectsCards = computed<TObjectCard[]>(() => {
   if (!objects.value?.length) return []
 
   return objects.value.map(object => {
@@ -41,12 +44,12 @@ const objectsCards = computed(() => {
       type,
       title,
       price,
-      preview: images[0],
+      images,
     }
   })
 })
 
-function changePage(newPageIndex) {
+function changePage(newPageIndex: number) {
   page.value = newPageIndex
 
   router.push({

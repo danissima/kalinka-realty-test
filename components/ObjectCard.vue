@@ -1,7 +1,7 @@
 <template>
   <li class="object-card">
     <NuxtLink class="object-card__link" :to="`/objects/${info.id}`">
-      <div class="object-card__preview" :style="`background-image: url('${info.preview}');`" />
+      <div class="object-card__preview" :style="`background-image: url('${info.images[0]}');`" />
       <div class="object-card__content">
         <div class="object-card__types">
           <span :class="getObjectTypeClasses(info.type[0])">
@@ -19,27 +19,24 @@
 </template>
 
 <script lang="ts" setup>
-import type { TObjectType } from '~/pages/objects/[id].vue';
+import type { IObject, TObjectType } from '~/pages/objects/[id].vue';
 
-const props = defineProps({
-  info: {
-    type: Object,
-    required: true,
-  },
+export type TObjectCard = Omit<IObject, 'description'>
 
-  locale: {
-    type: String,
-    required: true,
-  },
-})
+interface IProps {
+  info: TObjectCard
+  locale: 'ru' | 'en'
+}
+
+const props = defineProps<IProps>()
 
 const { getTypeHintClasses } = useObject()
 
 const formattedPrice = computed<string>(() => {
-  return `${Intl.NumberFormat(props.locale, { notation: "compact" }).format(props.info.price)} ₽`
+  return `${Intl.NumberFormat(props.locale, { notation: "compact" }).format(Number(props.info.price))} ₽`
 })
 
-function getObjectTypeClasses(objectType: TObjectType) {
+function getObjectTypeClasses(objectType: TObjectType): Record<string, boolean> {
 
   return {
     'object-card__type': true,

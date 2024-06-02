@@ -15,7 +15,7 @@ const props = withDefaults(defineProps<IProps>(), {
   theme: '',
 })
 
-const classes = computed(() => {
+const classes = computed<Record<string, boolean>>(() => {
   const themeToClass = props.theme.toLowerCase()
 
   return {

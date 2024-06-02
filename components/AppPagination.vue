@@ -8,21 +8,16 @@
 </template>
 
 <script lang="ts" setup>
+interface IProps {
+  totalPages: number
+  currentPageIndex: number
+}
+
 const emits = defineEmits(['page-change'])
 
-const props = defineProps({
-  totalPages: {
-    type: Number,
-    required: true,
-  },
+const props = defineProps<IProps>()
 
-  currentPageIndex: {
-    type: Number,
-    required: true,
-  }
-})
-
-function getButtonClasses(buttonIndex: number) {
+function getButtonClasses(buttonIndex: number): Record<string, boolean> {
   return {
     'pagination__button': true,
     'pagination__button_active': buttonIndex === props.currentPageIndex

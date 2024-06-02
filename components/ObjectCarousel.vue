@@ -9,10 +9,12 @@
         </div>
       </div>
     </div>
-    <AppButton :theme="type" class="object-carousel__button object-carousel__button_prev" @click="emblaApi?.scrollPrev()">
+    <AppButton :theme="type" class="object-carousel__button object-carousel__button_prev"
+      @click="emblaApi?.scrollPrev()">
       <IconChevronLeft />
     </AppButton>
-    <AppButton :theme="type" class="object-carousel__button object-carousel__button_next" @click="emblaApi?.scrollNext()">
+    <AppButton :theme="type" class="object-carousel__button object-carousel__button_next"
+      @click="emblaApi?.scrollNext()">
       <IconChevronRight />
     </AppButton>
   </div>
@@ -33,8 +35,7 @@ defineProps<IProps>()
 const [emblaRef, emblaApi] = emblaCarouselVue()
 const { getTypeHintClasses } = useObject()
 
-function getPriceClasses(objectType: TObjectType) {
-
+function getPriceClasses(objectType: TObjectType): Record<string, boolean> {
   return {
     'object-carousel__price': true,
     ...getTypeHintClasses(objectType),
