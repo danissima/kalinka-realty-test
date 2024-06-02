@@ -1,13 +1,20 @@
 <template>
-  <div class="object-carousel">
+  <div :class="getTypeThemeClasses('object-carousel', type)">
     <h3 :class="getPriceClasses(type)">{{ Number(price).toLocaleString('ru') }} ₽</h3>
     <div class="object-carousel__content" ref="emblaRef">
       <div class="object-carousel__container">
         <div v-for="(image, index ) in images" :key="image" class="object-carousel__slide">
           <img :src="image" :alt="`Preview #${index + 1}`">
+          <span>#{{ index + 1 }}</span>
         </div>
       </div>
     </div>
+    <button class="object-carousel__button object-carousel__button_prev" type="button" @click="emblaApi?.scrollPrev()">
+      <IconChevronLeft />
+    </button>
+    <button class="object-carousel__button object-carousel__button_next" type="button" @click="emblaApi?.scrollNext()">
+      <IconChevronRight />
+    </button>
   </div>
 </template>
 
@@ -23,8 +30,8 @@ interface IProps {
 
 defineProps<IProps>()
 
-const [emblaRef] = emblaCarouselVue()
-const { getTypeHintClasses } = useObject()
+const [emblaRef, emblaApi] = emblaCarouselVue()
+const { getTypeHintClasses, getTypeThemeClasses } = useObject()
 
 function getPriceClasses(objectType: TObjectType) {
 
@@ -38,12 +45,21 @@ function getPriceClasses(objectType: TObjectType) {
 
 <style lang="scss">
 .object-carousel {
+  --inside-gap: #{toRem(24)};
   position: relative;
+
+  &_condo {
+    --type-primary-color: #{$blue};
+  }
+
+  &_villa {
+    --type-primary-color: #{$red};
+  }
 
   &__price {
     position: absolute;
-    top: toRem(24);
-    left: toRem(24);
+    top: var(--inside-gap);
+    left: var(--inside-gap);
     z-index: 1;
     border-radius: toRem(24);
     padding: toRem(2) toRem(12);
@@ -61,6 +77,7 @@ function getPriceClasses(objectType: TObjectType) {
   }
 
   &__slide {
+    position: relative;
     flex: 0 0 100%;
     min-width: 0;
 
@@ -73,6 +90,51 @@ function getPriceClasses(objectType: TObjectType) {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  &__slide span {
+    position: absolute;
+    bottom: var(--inside-gap);
+    right: var(--inside-gap);
+    background-color: rgba($white, .6);
+    border-radius: toRem(24);
+    padding: toRem(2) toRem(8);
+    pointer-events: none;
+  }
+
+  &__button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    border-radius: 50%;
+    height: 40px;
+    min-width: 40px;
+    padding: toRem(8);
+    background-color: $white;
+    transition: color $transition, background-color $transition;
+
+    &_prev {
+      left: var(--inside-gap);
+    }
+
+    &_next {
+      right: var(--inside-gap);
+    }
+
+    &:hover {
+      color: var(--type-primary-color);
+    }
+
+    &:active {
+      color: $white;
+      background-color: var(--type-primary-color);
+    }
+  }
+
+  &__button svg {
+    width: 24px;
+    height: 24px;
   }
 }
 </style>

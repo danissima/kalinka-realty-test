@@ -10,7 +10,17 @@ export default function useObject() {
     }
   }
 
+  function getTypeThemeClasses(blockClass: string, objectType: TObjectType) {
+    const typeToClass = objectType.toLowerCase()
+
+    return {
+      [blockClass]: true,
+      [`${blockClass}_${typeToClass}`]: !!objectType,
+    }
+  }
+
   return {
     getTypeHintClasses,
+    getTypeThemeClasses,
   }
 }
