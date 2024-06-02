@@ -6,7 +6,10 @@
   </section>
   <section class="objects">
     <AppContainer>
-      <h2>Лучшие предложения</h2>
+      <header class="objects__header">
+        <h2>Лучшие предложения</h2>
+        <AppLoader :class="loaderClasses" />
+      </header>
       <ObjectsFilter :selected-types="selectedObjectTypes" @types-change="updateTypes" />
       <ul class="objects__grid">
         <ObjectCard v-for="object in objectsCards" :key="object.id" :info="object" locale="ru" />
@@ -34,7 +37,7 @@ const selectedObjectTypes = ref<TObjectType[]>(queryObjectTypes)
 const OBJECTS_PER_PAGE: number = 6
 const totalPages = ref<number>(getTotalPages(selectedObjectTypes.value))
 
-const { data: objects, pending } = await useFetch<IObject[]>(
+const { data: objects, status } = await useFetch<IObject[]>(
   () => getObjectsEndpoint(),
   {
     key: `objects-${page.value}`,
@@ -54,6 +57,13 @@ const objectsCards = computed<TObjectCard[]>(() => {
       images,
     }
   })
+})
+
+const loaderClasses = computed<Record<string, boolean>>(() => {
+  return {
+    'objects__loader': true,
+    'objects__loader_visible': status.value === 'pending'
+  }
 })
 
 function getObjectsEndpoint(): string {
@@ -102,7 +112,6 @@ function updateTypes(newTypes: TObjectType[]) {
   })
 }
 
-
 /* api doesnt provide amount of pages */
 /* this is a temporary solution */
 function getTotalPages(objectTypes: TObjectType[]) {
@@ -127,8 +136,19 @@ section + section {
 }
 
 .objects {
-  h2 {
+  &__header {
+    display: flex;
     margin-bottom: toRem(20);
+  }
+
+  &__loader {
+    opacity: 0;
+    margin-left: toRem(12);
+    transition: opacity $transition;
+
+    &_visible {
+      opacity: 1;
+    }
   }
 
   &__grid {
