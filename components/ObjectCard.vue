@@ -1,5 +1,5 @@
 <template>
-  <div class="object-card">
+  <li class="object-card">
     <NuxtLink class="object-card__link" :to="`/objects/${info.id}`">
       <div class="object-card__preview" :style="`background-image: url('${info.preview}');`" />
       <div class="object-card__content">
@@ -15,7 +15,7 @@
         </div>
       </div>
     </NuxtLink>
-  </div>
+  </li>
 </template>
 
 <script lang="ts" setup>
@@ -50,6 +50,8 @@ function getObjectTypeClasses(objectType: TObjectType) {
 
 <style lang="scss">
 .object-card {
+  list-style-type: none;
+
   &__link {
     position: relative;
     overflow: hidden;

@@ -8,11 +8,11 @@
 import type { TObjectType } from '~/pages/objects/[id].vue';
 
 interface IProps {
-  theme?: TObjectType
+  theme?: TObjectType | ''
 }
 
 const props = withDefaults(defineProps<IProps>(), {
-  theme: 'Condo',
+  theme: '',
 })
 
 const classes = computed(() => {
@@ -27,6 +27,7 @@ const classes = computed(() => {
 
 <style lang="scss">
 .button {
+  --type-primary-color: #{$dark-500};
   border-radius: toRem(48);
   height: 40px;
   min-width: 40px;

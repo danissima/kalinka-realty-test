@@ -2,7 +2,12 @@
   <section class="object">
     <AppContainer>
       <template v-if="status === 'success' && data">
-        <h1 class="object__title">{{ data.title[locale] }}</h1>
+        <header class="object__header">
+          <AppButton @click="router.back()">
+            <IconChevronLeft width="24" height="24" />
+          </AppButton>
+          <h1 class="object__title">{{ data.title[locale] }}</h1>
+        </header>
         <ObjectCarousel :images="data.images" :price="data.price" :type="data.type[0]" class="object__carousel" />
         <div class="object__description" v-html="data.description[locale]" />
       </template>
@@ -28,6 +33,7 @@ export interface IObject {
 }
 
 const route = useRoute()
+const router = useRouter()
 const locale = 'ru'
 
 const { data, status } = await useFetch<IObject>(
@@ -44,8 +50,14 @@ useHead({
 
 <style lang="scss">
 .object {
-  &__title {
+  &__header {
+    display: flex;
+    align-items: center;
     margin-bottom: toRem(24);
+  }
+
+  &__title {
+    margin-left: toRem(16);
   }
 
   &__carousel {

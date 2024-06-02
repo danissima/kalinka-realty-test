@@ -7,10 +7,9 @@
   <section class="objects">
     <AppContainer>
       <h2>Жилые комплексы и проекты</h2>
-      <p class="objects__description">Наши приоритеты - удобство, красота и эстетичность</p>
-      <div class="objects__grid">
+      <ul class="objects__grid">
         <ObjectCard v-for="object in objectsCards" :key="object.id" :info="object" locale="ru" />
-      </div>
+      </ul>
       <AppPagination :total-pages="5" :current-page-index="page" @page-change="changePage" />
     </AppContainer>
   </section>

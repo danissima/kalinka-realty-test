@@ -43,8 +43,8 @@ function changePage(newIndex: number) {
 
   &__button {
     &_active {
-      border-color: $blue;
-      background-color: $blue;
+      border-color: $dark;
+      background-color: $dark;
       color: $white;
     }
   }
