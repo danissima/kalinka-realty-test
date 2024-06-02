@@ -2,3 +2,15 @@
 @import '_general.scss';
 @import '_reset.scss';
 @import '_typography.scss';
+
+.type-hint {
+  color: $white;
+
+  &_condo {
+    background-color: rgba($blue, 0.6);
+  }
+
+  &_villa {
+    background-color: rgba($red, 0.6);
+  }
+}

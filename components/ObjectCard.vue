@@ -4,8 +4,8 @@
       <div class="object-card__preview" :style="`background-image: url('${info.preview}');`" />
       <div class="object-card__content">
         <div class="object-card__types">
-          <span v-for="objectType in info.type" :key="objectType" :class="getObjectTypeClasses(objectType)">
-            {{ objectType }}</span>
+          <span :class="getObjectTypeClasses(info.type[0])">
+            {{ info.type[0] }}</span>
         </div>
         <h3 class="object-card__title">
           {{ info.title[locale] }}
@@ -19,6 +19,8 @@
 </template>
 
 <script lang="ts" setup>
+import type { TObjectType } from '~/pages/objects/[id].vue';
+
 const props = defineProps({
   info: {
     type: Object,
@@ -31,16 +33,17 @@ const props = defineProps({
   },
 })
 
+const { getTypeHintClasses } = useObject()
+
 const formattedPrice = computed<string>(() => {
   return `${Intl.NumberFormat(props.locale, { notation: "compact" }).format(props.info.price)} ₽`
 })
 
-function getObjectTypeClasses(objectType: string) {
-  const typeToClass = objectType.toLowerCase()
+function getObjectTypeClasses(objectType: TObjectType) {
 
   return {
     'object-card__type': true,
-    [`object-card__type_${typeToClass}`]: !!objectType,
+    ...getTypeHintClasses(objectType),
   }
 }
 </script>
@@ -104,14 +107,6 @@ function getObjectTypeClasses(objectType: string) {
   &__type {
     padding: toRem(2) toRem(8);
     border-radius: toRem(20);
-
-    &_condo {
-      background-color: rgba($blue, .6);
-    }
-
-    &_villa {
-      background-color: rgba($red, .6);
-    }
   }
 
   &__title {

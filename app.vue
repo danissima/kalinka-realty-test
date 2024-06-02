@@ -33,4 +33,8 @@ body,
   min-height: 100%;
   height: auto;
 }
+
+.main {
+  margin-bottom: toRem(32);
+}
 </style>
