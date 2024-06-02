@@ -49,6 +49,10 @@ function getPriceClasses(objectType: TObjectType): Record<string, boolean> {
   --inside-gap: #{toRem(24)};
   position: relative;
 
+  @include break($md) {
+    --inside-gap: #{toRem(12)};
+  }
+
   &__price {
     position: absolute;
     top: var(--inside-gap);
@@ -56,12 +60,20 @@ function getPriceClasses(objectType: TObjectType): Record<string, boolean> {
     z-index: 1;
     border-radius: toRem(24);
     padding: toRem(2) toRem(12);
+
+    @include break($md) {
+      display: none;
+    }
   }
 
   &__content {
     overflow: hidden;
     max-height: 750px;
     border-radius: toRem(8);
+
+    @include break($md) {
+      max-height: 250px;
+    }
   }
 
   &__container {
@@ -93,6 +105,10 @@ function getPriceClasses(objectType: TObjectType): Record<string, boolean> {
     border-radius: toRem(24);
     padding: toRem(2) toRem(8);
     pointer-events: none;
+
+    @include break($md) {
+      font-size: toRem(16);
+    }
   }
 
   &__button {

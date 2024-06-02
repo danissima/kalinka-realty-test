@@ -44,8 +44,10 @@ const classes = computed<Record<string, boolean>>(() => {
     --type-primary-color: #{$red};
   }
 
-  &:hover {
-    color: var(--type-primary-color);
+  @include hover {
+    &:hover {
+      color: var(--type-primary-color);
+    }
   }
 
   &:active {

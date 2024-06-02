@@ -97,6 +97,10 @@ function getObjectTypeClasses(objectType: TObjectType): Record<string, boolean> 
     flex-direction: column;
     height: 100%;
     padding: toRem(32) toRem(40);
+
+    @include break($md) {
+      padding: toRem(16) toRem(20);
+    }
   }
 
   &__types {
@@ -106,6 +110,10 @@ function getObjectTypeClasses(objectType: TObjectType): Record<string, boolean> 
   &__type {
     padding: toRem(2) toRem(8);
     border-radius: toRem(20);
+
+    @include break($md) {
+      font-size: toRem(16);
+    }
   }
 
   &__title {
@@ -116,6 +124,9 @@ function getObjectTypeClasses(objectType: TObjectType): Record<string, boolean> 
     margin-top: auto;
     font-size: toRem(28);
 
+    @include break($md) {
+      font-size: toRem(20);
+    }
   }
 }
 </style>

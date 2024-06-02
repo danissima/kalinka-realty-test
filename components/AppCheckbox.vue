@@ -61,7 +61,7 @@ const model = defineModel()
     }
   }
 
-  @media screen and (hover: hover) {
+  @include hover {
     &__label:hover &__icon_default {
       color: transparent;
     }

@@ -1,12 +1,12 @@
 <template>
   <section class="about">
     <AppContainer>
-      <h1>Агентство элитной недвижимости в Москве</h1>
+      <h1>Агентство элитной недвижимости в&nbsp;Москве</h1>
     </AppContainer>
   </section>
   <section class="objects">
     <AppContainer>
-      <h2>Жилые комплексы и проекты</h2>
+      <h2>Лучшие предложения</h2>
       <ObjectsFilter :selected-types="selectedObjectTypes" @types-change="updateTypes" />
       <ul class="objects__grid">
         <ObjectCard v-for="object in objectsCards" :key="object.id" :info="object" locale="ru" />
@@ -113,6 +113,10 @@ function getTotalPages(objectTypes: TObjectType[]) {
 <style lang="scss">
 section + section {
   margin-top: toRem(80);
+
+  @include break($md) {
+    margin-top: toRem(40);
+  }
 }
 
 .about {
