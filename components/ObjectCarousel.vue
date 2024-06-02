@@ -1,5 +1,5 @@
 <template>
-  <div :class="getTypeThemeClasses('object-carousel', type)">
+  <div class="object-carousel">
     <h3 :class="getPriceClasses(type)">{{ Number(price).toLocaleString('ru') }} ₽</h3>
     <div class="object-carousel__content" ref="emblaRef">
       <div class="object-carousel__container">
@@ -9,12 +9,12 @@
         </div>
       </div>
     </div>
-    <button class="object-carousel__button object-carousel__button_prev" type="button" @click="emblaApi?.scrollPrev()">
+    <AppButton :theme="type" class="object-carousel__button object-carousel__button_prev" @click="emblaApi?.scrollPrev()">
       <IconChevronLeft />
-    </button>
-    <button class="object-carousel__button object-carousel__button_next" type="button" @click="emblaApi?.scrollNext()">
+    </AppButton>
+    <AppButton :theme="type" class="object-carousel__button object-carousel__button_next" @click="emblaApi?.scrollNext()">
       <IconChevronRight />
-    </button>
+    </AppButton>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ interface IProps {
 defineProps<IProps>()
 
 const [emblaRef, emblaApi] = emblaCarouselVue()
-const { getTypeHintClasses, getTypeThemeClasses } = useObject()
+const { getTypeHintClasses } = useObject()
 
 function getPriceClasses(objectType: TObjectType) {
 
@@ -47,14 +47,6 @@ function getPriceClasses(objectType: TObjectType) {
 .object-carousel {
   --inside-gap: #{toRem(24)};
   position: relative;
-
-  &_condo {
-    --type-primary-color: #{$blue};
-  }
-
-  &_villa {
-    --type-primary-color: #{$red};
-  }
 
   &__price {
     position: absolute;
@@ -107,12 +99,6 @@ function getPriceClasses(objectType: TObjectType) {
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
-    border-radius: 50%;
-    height: 40px;
-    min-width: 40px;
-    padding: toRem(8);
-    background-color: $white;
-    transition: color $transition, background-color $transition;
 
     &_prev {
       left: var(--inside-gap);
@@ -120,15 +106,6 @@ function getPriceClasses(objectType: TObjectType) {
 
     &_next {
       right: var(--inside-gap);
-    }
-
-    &:hover {
-      color: var(--type-primary-color);
-    }
-
-    &:active {
-      color: $white;
-      background-color: var(--type-primary-color);
     }
   }
 

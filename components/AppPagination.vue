@@ -1,9 +1,9 @@
 <template>
   <div class="pagination">
-    <button v-for="index in totalPages" :key="index" :class="getButtonClasses(index)" type="button"
-      @click="changePage(index)">
+    <AppButton v-for="index in totalPages" :key="index" :class="getButtonClasses(index)"
+      :disabled="currentPageIndex === index" @click="changePage(index)">
       {{ index }}
-    </button>
+    </AppButton>
   </div>
 </template>
 
@@ -42,18 +42,6 @@ function changePage(newIndex: number) {
   justify-content: center;
 
   &__button {
-    border: 1px solid rgba($dark, .3);
-    border-radius: toRem(4);
-    height: 40px;
-    min-width: 40px;
-    padding: toRem(8);
-    transition: border-color $transition, background-color $transition, color $transition;
-    font-size: toRem(18);
-
-    &:hover {
-      border-color: $blue;
-    }
-
     &_active {
       border-color: $blue;
       background-color: $blue;

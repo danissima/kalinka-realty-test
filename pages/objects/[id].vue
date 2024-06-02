@@ -52,8 +52,8 @@ useHead({
     margin-bottom: toRem(48);
   }
 
-  &__description p + p {
-    margin-top: toRem(12);
+  &__description p {
+    margin: toRem(12) 0;
   }
 }
 </style>
